@@ -7,6 +7,9 @@
 <title>首页</title>
 </head>
 <body>
-	<a>${hello}</a>
+	<a>${user.username}</a><br/>
+	<a>${user.birthday}</a><br/>
+	<a>${user.sex}</a><br/>
+	<a>${user.address}</a><br/>
 </body>
 </html>

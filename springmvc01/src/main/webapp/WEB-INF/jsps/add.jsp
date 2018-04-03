@@ -7,6 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a>这是add视图页面</a>
+	<form action="${pageContext.request.contextPath}/command.do" method="post">
+		用户名:<input type="text" name="username"/><br/>
+		生    日:<input type="text" name="birthday"/><br/>
+		性别:<input type="text" name="sex"/><br/>
+		地址:<input type="text" name="address"/><br/>
+		<input type="submit" value="提交"/>
+	</form>
 </body>
 </html>

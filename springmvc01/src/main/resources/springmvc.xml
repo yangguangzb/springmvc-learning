@@ -43,7 +43,10 @@
 	<!-- 自定义HttpController -->
 	<bean id="http" class="com.san.controller.HttpController"></bean>
 	
+	<!-- 跳转到add页面的bean -->
 	<bean name="/toAdd.do" class="com.san.controller.ToAddController"></bean>
+	<!-- 命令bean -->
+	<bean name="/command.do" class="com.san.controller.CommandController"></bean>
 	
 	<!-- 配置springmvc视图解析器，解析逻辑视图 
 		后台返回逻辑视图：index
