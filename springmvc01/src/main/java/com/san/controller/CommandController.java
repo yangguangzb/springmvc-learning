@@ -1,9 +1,15 @@
 package com.san.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.validation.BindException;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractCommandController;
 
@@ -26,5 +32,21 @@ public class CommandController extends AbstractCommandController{
 		mv.addObject("user", user);
 		mv.setViewName("index");
 		return mv;
+	}
+	
+	@Override
+	/**
+	 * SpringMVC 时间转换
+	 */
+	protected void initBinder(HttpServletRequest request,
+			ServletRequestDataBinder binder) throws Exception {
+		String str = request.getParameter("birthday");
+		if(str.contains("/")){
+			binder.registerCustomEditor(Date.class, 
+					new CustomDateEditor(new SimpleDateFormat("yyyy/MM/dd"), true));
+		}else if(str.contains("-")){
+			binder.registerCustomEditor(Date.class, 
+					new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+		}
 	}
 }
