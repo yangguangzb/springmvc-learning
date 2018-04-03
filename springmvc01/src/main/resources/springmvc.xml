@@ -18,11 +18,32 @@
 	根据(自定义Controler)的name属性的url去寻找handler(Action) -->
 	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
 	
+	<!-- 简单处理器映射器：把url进行集中配置 -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/abc.do">myController</prop>
+				<prop key="/ss.do">http</prop>
+				<prop key="/mine.do">http</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 直接通过类名(首字母小写)访问：类名.do形式来访问controller -->
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"></bean>
+	
 	<!-- 配置处理器适配器执行Controller，springmvc默认的是：SimpleControllerHandlerAdapter -->
 	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
 	
 	<!-- 自定义Controller -->
-	<bean name="/hello.do" class="com.san.controller.MyController"/>
+	<bean id="myController" name="/hello.do" class="com.san.controller.MyController"/>
+	
+	<!-- HttpRequestHandlerAdapter负责执行实现接口HttpRequestHandler的后端控制器 -->
+	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"></bean>
+	<!-- 自定义HttpController -->
+	<bean id="http" class="com.san.controller.HttpController"></bean>
+	
+	<bean name="/toAdd.do" class="com.san.controller.ToAddController"></bean>
 	
 	<!-- 配置springmvc视图解析器，解析逻辑视图 
 		后台返回逻辑视图：index
